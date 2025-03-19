@@ -1,5 +1,6 @@
 export default interface HiraganaData {
     viewBox: string,
+    scale: number,
     layers: {
         interactiveStrokes: InteractiveStrokeInfo[],
         mask: MaskStrokeInfo[]
