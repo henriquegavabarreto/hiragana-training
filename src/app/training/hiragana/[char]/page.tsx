@@ -1,6 +1,7 @@
 import GenkouBox from "@/components/GenkouBox";
 import getHiraganaData from "@/lib/getHiraganaData";
 import HiraganaData from "@/types/HiraganaData";
+import Link from "next/link";
 
 export default async function TrainingCharacter({
 	params,
@@ -14,8 +15,13 @@ export default async function TrainingCharacter({
 	if (!hiragana) return <div>Could not find character {decodedChar}</div>;
 
 	return (
-		<div>
-			<GenkouBox charData={hiragana}></GenkouBox>
+		<div className="h-screen flex items-center justify-center">
+			<div className="flex flex-col items-center justify-center w-full max-w-1/3">
+				<GenkouBox charData={hiragana}></GenkouBox>
+				<Link href={"/training/hiragana"} className="m-4">
+					Back
+				</Link>
+			</div>
 		</div>
 	);
 }

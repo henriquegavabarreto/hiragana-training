@@ -14,13 +14,16 @@ export default async function GenkouBox({
 
 	return (
 		<svg
-			className="w-full border-5 border-black rounded-xl"
+			className="w-full border-5 border-black rounded-2xl"
 			id="svg"
 			xmlns="http://www.w3.org/2000/svg"
 			xmlnsXlink="http://www.w3.org/1999/xlink"
 			preserveAspectRatio="xMidYMid meet"
 			viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
 		>
+			<g id="background">
+				<rect width="100%" height="100%" fill="white" />
+			</g>
 			<GenkouGuideLines />
 			<g id="show">
 				{charData.layers.mask.map((stroke, index) => (
