@@ -6,11 +6,11 @@ import Link from "next/link";
 export default async function TrainingCharacter({
 	params,
 }: {
-	params: { char: string };
+	params: Promise<{ char: string }>;
 }) {
 	const { char } = await params;
 	const decodedChar = decodeURIComponent(char);
-	let hiragana: HiraganaData | undefined = getHiraganaData(decodedChar);
+	const hiragana: HiraganaData | undefined = getHiraganaData(decodedChar);
 
 	if (!hiragana) return <div>Could not find character {decodedChar}</div>;
 

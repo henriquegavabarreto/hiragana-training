@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import Draw, { DrawSession } from "@/lib/draw";
 
 export default function GenkouBox({ charData }: { charData: HiraganaData }) {
-	const [boxSize, setBoxSize] = useState<Number>(0);
+	const [boxSize, setBoxSize] = useState<number>(0);
 	const svgElement = useRef<SVGSVGElement | null>(null);
 	const drawSession = useRef<DrawSession | null>(null); // Use ref instead of state
 
@@ -21,25 +21,31 @@ export default function GenkouBox({ charData }: { charData: HiraganaData }) {
 	}, []);
 
 	// Event handlers for drawing
+	// Start drawing on pointer down
 	function handlePointerDown(e: React.PointerEvent<SVGSVGElement>) {
+		e.preventDefault();
 		if (drawSession.current) Draw.start(drawSession.current, e.nativeEvent);
 	}
 
+	// Continue drawing while pointer moves
 	function handlePointerMove(e: React.PointerEvent<SVGSVGElement>) {
+		e.preventDefault();
 		if (drawSession.current) Draw.continue(drawSession.current, e.nativeEvent);
 	}
 
+	// Stop drawing when pointer up
 	function handlePointerUp() {
 		if (drawSession.current) Draw.stop(drawSession.current);
 	}
 
-	// Clear drawing
+	// Clear all drawing strokes
 	function clearDrawing() {
 		if (drawSession.current) {
 			Draw.clearAll(drawSession.current);
 		}
 	}
 
+	// Erase last stroke
 	function clearLastStroke() {
 		if (drawSession.current) Draw.clearLast(drawSession.current);
 	}
@@ -47,7 +53,7 @@ export default function GenkouBox({ charData }: { charData: HiraganaData }) {
 	return (
 		<>
 			<svg
-				className="w-full border-5 border-black rounded-2xl bg-white fill-current"
+				className="w-full border-5 border-black rounded-2xl bg-white fill-current touch-none"
 				id="svg"
 				xmlns="http://www.w3.org/2000/svg"
 				xmlnsXlink="http://www.w3.org/1999/xlink"
